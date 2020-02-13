@@ -7,13 +7,19 @@ xxx
 **Note 1:** In the first line of the BASH, PERL and Python scripts in iREAD, the path for BASH, PERL and Python is set as follows by default:
 ```bash
 
-python predict.py
+python predict_ad_genes.py
 
 ```
 
 
 ## 2. Evaluation of top scored genes based on multiple biological networks
 
+**Note 1:** In the first line of the BASH, PERL and Python scripts in iREAD, the path for BASH, PERL and Python is set as follows by default:
+```bash
+
+python evaluation_top_scored_genes.py
+
+```
 
 
 xx
