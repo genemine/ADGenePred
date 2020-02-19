@@ -1,7 +1,6 @@
 # AD gene prediction
 
-
-xxx
+(unzip a zip file in data file first)
 ## 1. Building models for AD gene prediction
 
 **Note 1:** In the first line of the BASH, PERL and Python scripts in iREAD, the path for BASH, PERL and Python is set as follows by default:
