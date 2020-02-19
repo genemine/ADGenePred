@@ -21,7 +21,6 @@ python evaluation_top_scored_genes.py
 ```
 
 
-xx
 ## 3. Contact
 If you have any questions, please contact at:<br>
 Cuixiang Lin, lincxcsu@csu.edu.cn<br>
