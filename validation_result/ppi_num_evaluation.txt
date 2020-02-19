@@ -1,0 +1,3 @@
+p-value:0.0001
+obeserved:84.25
+random:23.0433
