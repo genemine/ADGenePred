@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Sun Feb 18 08:33:18 2020
+Created on Sun Feb 16 10:33:18 2020
 
 @author: lincx
 """
@@ -43,29 +43,23 @@ def write_file(p_val,obeserved,randomx,f):
 def seq_validation(genelist,num):
     print('Step1: evaluation of sequence similarity with known genes')
     score=eval(open('data/sequence_similarity.txt').read())
-    def std(x,y):
-        x = (x-np.min(y))/(np.max(y)-np.min(y))
-        return x
     obeserved = []
     for item in genelist[0:num]:
         if item in score:
             obeserved.append(score[item])
-    random_value = [0]*times
+    random_score= [0]*times
     for i in range(times):
         random_list = genelist[random.sample(range(len(genelist)),num)]
         for item in random_list:
             if item in score:
-                random_value[i] = random_value[i]+score[item]
-        random_value[i] = random_value[i]/num 
-    Score=list(score.values())
-    seq_random = std(random_value,Score)
-    obeserved=std(obeserved,Score)
+                random_score[i] = random_score[i]+score[item]
+        random_score[i] = random_score[i]/num 
     obeserved = np.round(np.mean(obeserved),4)
-    randomx= np.round(np.mean(seq_random),4)
-    p_val=p_value(seq_random,obeserved)
+    randomx= np.round(np.mean(random_score),4)
+    p_val=p_value(random_score,obeserved)
     f=open('validation_result/seq_evaluation.txt','w')
     write_file(p_val,obeserved,randomx,f)
-    return seq_random,obeserved,p_val
+    return p_val,obeserved,random_score
 
 
 
@@ -91,7 +85,8 @@ def coexpr_validation(num,genelist,times):
     print('score of coexpression with AD-associated genes')
     f=open('validation_result/coexpr_score_evaluation.txt','w')
     write_file(pval,obeserved,randomx,f)
-    return obeserved,random_score
+    return pval,obeserved,random_score
+
 
 
 
@@ -154,9 +149,10 @@ def mirna_validation(ad_gene,num,genelist,times):
     return p_val,obeserved,random_num
 
 ### main ###
+    
 num = 200
 print(num)
-times=1000
+times=10000
 genes_known = pd.read_csv('data/mat_training.txt',sep='\t',index_col=0,header=0).index
 genes_all = pd.read_csv('data/prediction.txt',sep='\t',index_col=0,header=0).index
 ad_gene=eval(open('data/ad_gene.txt').read())
@@ -168,12 +164,12 @@ for item in genes_all:
         genelist.append(item)
 genelist = np.array(genelist)
 
-seq_random,obeserved,p_val=seq_validation(genelist,num)
+seq_validation(genelist,num)
 
-obeserved,random_score=coexpr_validation(num,genelist,times)
+coexpr_validation(num,genelist,times)
 
 ppi_validation(ad_gene,num,genelist,times)
 
-p_val,obeserved,random_num = mirna_validation(ad_gene,num,genelist,times)      
+mirna_validation(ad_gene,num,genelist,times)      
 
 
