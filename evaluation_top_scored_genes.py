@@ -11,19 +11,6 @@ import pandas as pd
 import numpy as np
 import random
 
-num = 200
-print(num)
-times=1000
-genes_known = pd.read_csv('data/mat_training.txt',sep='\t',index_col=0,header=0).index
-genes_all = pd.read_csv('data/prediction.txt',sep='\t',index_col=0,header=0).index
-ad_gene=eval(open('data/ad_gene.txt').read())
-genelist=[]
-
-#remove known genes to evaluate
-for item in genes_all:
-    if item not in genes_known:
-        genelist.append(item)
-genelist = np.array(genelist)
 
 def p_value(random_list,obeserved):
     count=0
@@ -166,7 +153,20 @@ def mirna_validation(ad_gene,num,genelist,times):
     write_file(p_val,obeserved,randomx,f)
     return p_val,obeserved,random_num
 
+### main ###
+num = 200
+print(num)
+times=1000
+genes_known = pd.read_csv('data/mat_training.txt',sep='\t',index_col=0,header=0).index
+genes_all = pd.read_csv('data/prediction.txt',sep='\t',index_col=0,header=0).index
+ad_gene=eval(open('data/ad_gene.txt').read())
+genelist=[]
 
+#remove known genes to evaluate
+for item in genes_all:
+    if item not in genes_known:
+        genelist.append(item)
+genelist = np.array(genelist)
 
 seq_random,obeserved,p_val=seq_validation(genelist,num)
 
