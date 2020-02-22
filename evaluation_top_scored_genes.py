@@ -164,12 +164,12 @@ for item in genes_all:
         genelist.append(item)
 genelist = np.array(genelist)
 
-seq_validation(genelist,num)
+seq_pval,seq_obeserved,seq_random_score=seq_validation(genelist,num)
 
-coexpr_validation(num,genelist,times)
+coexp_pval,coexp_obeserved,coexp_random_score=coexpr_validation(num,genelist,times)
 
 ppi_validation(ad_gene,num,genelist,times)
 
-mirna_validation(ad_gene,num,genelist,times)      
+miRNA_pval,miRNA_obeserved,miRNA_random_num=mirna_validation(ad_gene,num,genelist,times)      
 
 
