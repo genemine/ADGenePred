@@ -40,7 +40,7 @@ def write_file(p_val,obeserved,randomx,f):
 
 #1.evaluation of sequence similarity with known genes
 
-def seq_validation(genelist,num):
+def seq_validation(genelist,num,times):
     print('Step1: evaluation of sequence similarity with known genes')
     score=eval(open('data/sequence_similarity.txt').read())
     obeserved = []
@@ -164,7 +164,7 @@ for item in genes_all:
         genelist.append(item)
 genelist = np.array(genelist)
 
-seq_pval,seq_obeserved,seq_random_score=seq_validation(genelist,num)
+seq_pval,seq_obeserved,seq_random_score=seq_validation(genelist,num,times)
 
 coexp_pval,coexp_obeserved,coexp_random_score=coexpr_validation(num,genelist,times)
 
