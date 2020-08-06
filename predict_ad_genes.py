@@ -73,7 +73,7 @@ print(AUPRC)
 result={}
 result['AUROC']=AUROC
 result['AUPRC']=AUPRC
-fnew=open('data/model_performace.txt','w')
+fnew=open('data/model_performance.txt','w')
 fnew.write(str(result))
 fnew.close()
 
